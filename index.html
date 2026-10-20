@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Federalgroup Logistics — Express Global Courier & Shipping</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandBlue: '#0B3D91',
+            brandBlueDark: '#082C6A',
+            brandRed: '#E63946',
+            brandRedHover: '#C92A37',
+            navyDark: '#0F172A',
+            lightBg: '#F8FAFC'
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar and UI Enhancements */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #0B3D91;
+      border-radius: 4px;
+    }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+    .hero-bg {
+      background: linear-gradient(135deg, rgba(11, 61, 145, 0.92) 0%, rgba(15, 23, 42, 0.95) 100%), 
+                  url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    }
+    .gradient-badge {
+      background: linear-gradient(90deg, #E63946 0%, #FF6B6B 100%);
+    }
+    .timeline-step.active .timeline-icon {
+      background-color: #0B3D91;
+      color: white;
+      border-color: #0B3D91;
+    }
+    .timeline-step.completed .timeline-icon {
+      background-color: #10B981;
+      color: white;
+      border-color: #10B981;
+    }
+  </style>
+</head>
+<body class="bg-lightBg text-slate-800 font-sans antialiased selection:bg-brandRed selection:text-white flex flex-col min-h-screen">
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-navyDark text-slate-300 text-xs py-2 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-4">
+        <span><i class="fa-solid fa-headset text-brandRed mr-1"></i> 24/7 Support: +1 (800) 555-FGL-EXPRESS</span>
+        <span class="hidden md:inline"><i class="fa-solid fa-envelope text-brandRed mr-1"></i> support@federalgrouplogistics.com</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse mr-1.5"></span> Global Network: Fully Operational</span>
+        <div class="border-l border-slate-700 pl-3 flex gap-3 text-slate-400">
+          <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        
+        <!-- Brand Logo -->
+        <a href="#" onclick="navigateTo('home'); return false;" class="flex items-center gap-3 group">
+          <div class="w-12 h-12 bg-brandBlue rounded-xl flex items-center justify-center text-white shadow-md group-hover:bg-brandBlueDark transition-all">
+            <i class="fa-solid fa-boxes-packing text-2xl"></i>
+          </div>
+          <div>
+            <span class="font-heading font-extrabold text-2xl tracking-tight text-brandBlue block leading-none">
+              FEDERAL<span class="text-brandRed">GROUP</span>
+            </span>
+            <span class="text-[10px] uppercase font-bold tracking-widest text-slate-500 block mt-1">
+              LOGISTICS & COURIER
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center gap-1 xl:gap-2">
+          <button onclick="navigateTo('home')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-brandBlue hover:bg-slate-100 transition-all" data-page="home">Home</button>
+          <button onclick="navigateTo('tracking')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-brandBlue hover:bg-slate-100 transition-all" data-page="tracking">Track Shipment</button>
+          <button onclick="navigateTo('services')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-brandBlue hover:bg-slate-100 transition-all" data-page="services">Services</button>
+          <button onclick="navigateTo('quote')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-brandBlue hover:bg-slate-100 transition-all" data-page="quote">Request a Quote</button>
+          <button onclick="navigateTo('booking')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-brandBlue hover:bg-slate-100 transition-all" data-page="booking">Book Shipment</button>
+          <button onclick="navigateTo('about')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-brandBlue hover:bg-slate-100 transition-all" data-page="about">About Us</button>
+          <button onclick="navigateTo('contact')" class="nav-btn px-3 py-2 rounded-lg text-sm font-semibold text-slate-700 hover:text-brandBlue hover:bg-slate-100 transition-all" data-page="contact">Contact</button>
+        </nav>
+
+        <!-- CTA Header Action -->
+        <div class="hidden lg:flex items-center gap-3">
+          <button onclick="navigateTo('tracking')" class="bg-brandRed hover:bg-brandRedHover text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-all shadow-md flex items-center gap-2">
+            <i class="fa-solid fa-magnifying-glass"></i> Track Parcel
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <div class="flex lg:hidden items-center">
+          <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="p-2.5 rounded-lg text-slate-600 hover:text-brandBlue hover:bg-slate-100 focus:outline-none">
+            <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-6 space-y-2 shadow-xl">
+      <button onclick="navigateTo('home')" class="w-full text-left px-4 py-3 rounded-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-brandBlue">Home</button>
+      <button onclick="navigateTo('tracking')" class="w-full text-left px-4 py-3 rounded-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-brandBlue">Track Shipment</button>
+      <button onclick="navigateTo('services')" class="w-full text-left px-4 py-3 rounded-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-brandBlue">Services</button>
+      <button onclick="navigateTo('quote')" class="w-full text-left px-4 py-3 rounded-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-brandBlue">Request a Quote</button>
+      <button onclick="navigateTo('booking')" class="w-full text-left px-4 py-3 rounded-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-brandBlue">Book a Shipment</button>
+      <button onclick="navigateTo('about')" class="w-full text-left px-4 py-3 rounded-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-brandBlue">About Us</button>
+      <button onclick="navigateTo('contact')" class="w-full text-left px-4 py-3 rounded-lg font-medium text-slate-700 hover:bg-slate-100 hover:text-brandBlue">Contact Us</button>
+      <div class="pt-2">
+        <button onclick="navigateTo('booking')" class="w-full bg-brandRed text-white py-3 rounded-xl font-medium text-center">Book Shipment Now</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT VIEWS CONTAINER -->
+  <main class="flex-grow">
+
+    <!-- ================= PAGE 1: HOME ================= -->
+    <section id="page-home" class="page-view block">
+      
+      <!-- Hero Section -->
+      <div class="hero-bg text-white py-20 lg:py-28 px-4 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold uppercase tracking-wider text-slate-200">
+              <span class="w-2 h-2 rounded-full bg-brandRed"></span> International Express Courier
+            </div>
+            <h1 class="font-heading font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-tight">
+              Delivering <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-200">Beyond</span> Boundaries.
+            </h1>
+            <p class="text-slate-200 text-lg sm:text-xl font-normal max-w-2xl leading-relaxed">
+              Global express freight, air & ocean logistics, and door-to-door courier solutions engineered for speed, safety, and total precision.
+            </p>
+            <div class="flex flex-wrap gap-4 pt-2">
+              <button onclick="navigateTo('booking')" class="bg-brandRed hover:bg-brandRedHover text-white px-8 py-4 rounded-xl font-semibold shadow-lg transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i> Book Shipment
+              </button>
+              <button onclick="navigateTo('quote')" class="bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/30 px-8 py-4 rounded-xl font-semibold transition-all">
+                Calculate Rate
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Hero Tracking Card -->
+          <div class="lg:col-span-5">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-2xl text-slate-800 border border-slate-100 relative">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="font-heading font-bold text-xl text-brandBlue flex items-center gap-2">
+                  <i class="fa-solid fa-location-crosshairs text-brandRed"></i> Track Your Parcel
+                </h2>
+                <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">Live Tracking</span>
+              </div>
+              <p class="text-sm text-slate-500 mb-6">Enter your 10-character Federalgroup tracking number below.</p>
+              
+              <form onsubmit="event.preventDefault(); quickTrack();" class="space-y-4">
+                <div>
+                  <div class="relative">
+                    <input type="text" id="quick-tracking-input" placeholder="e.g. FGL-98234710-US" class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brandBlue focus:border-brandBlue outline-none font-mono text-slate-800 uppercase text-sm">
+                    <i class="fa-solid fa-barcode absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg"></i>
+                  </div>
+                </div>
+                <button type="submit" class="w-full bg-brandBlue hover:bg-brandBlueDark text-white py-3.5 rounded-xl font-semibold transition-all shadow-md flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-arrows-rotate"></i> Track Package Now
+                </button>
+              </form>
+
+              <!-- Sample Demo Clickable IDs -->
+              <div class="mt-6 pt-4 border-t border-slate-100">
+                <span class="text-xs text-slate-400 block mb-2 font-medium">Try Demo Tracking Numbers:</span>
+                <div class="flex flex-wrap gap-2 text-xs">
+                  <button onclick="fillAndTrack('FGL-98234710-US')" class="bg-slate-100 hover:bg-blue-50 text-brandBlue px-2.5 py-1 rounded font-mono font-semibold transition-all">FGL-98234710-US</button>
+                  <button onclick="fillAndTrack('FGL-44109823-UK')" class="bg-slate-100 hover:bg-blue-50 text-brandBlue px-2.5 py-1 rounded font-mono font-semibold transition-all">FGL-44109823-UK</button>
+                  <button onclick="fillAndTrack('FGL-77210943-NG')" class="bg-slate-100 hover:bg-blue-50 text-brandBlue px-2.5 py-1 rounded font-mono font-semibold transition-all">FGL-77210943-NG</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Live Stats Banner -->
+      <div class="bg-brandBlue text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div class="space-y-1">
+            <div class="font-heading font-extrabold text-3xl sm:text-4xl text-white">12.8M+</div>
+            <div class="text-slate-300 text-sm">Parcels Delivered</div>
+          </div>
+          <div class="space-y-1">
+            <div class="font-heading font-extrabold text-3xl sm:text-4xl text-white">220+</div>
+            <div class="text-slate-300 text-sm">Countries Served</div>
+          </div>
+          <div class="space-y-1">
+            <div class="font-heading font-extrabold text-3xl sm:text-4xl text-white">99.4%</div>
+            <div class="text-slate-300 text-sm">On-Time Delivery Rate</div>
+          </div>
+          <div class="space-y-1">
+            <div class="font-heading font-extrabold text-3xl sm:text-4xl text-white">1,450+</div>
+            <div class="text-slate-300 text-sm">Global Express Hubs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Services Overview -->
+      <div class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <span class="text-brandRed font-bold uppercase tracking-wider text-sm">World-Class Solutions</span>
+          <h2 class="font-heading text-3xl sm:text-4xl font-extrabold text-navyDark">Tailored Logistics & Shipping</h2>
+          <p class="text-slate-600">From urgent air express documents to multi-container ocean freight, Federalgroup Logistics delivers end-to-end security.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all group">
+            <div class="w-14 h-14 bg-blue-50 text-brandBlue rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brandBlue group-hover:text-white transition-all">
+              <i class="fa-solid fa-plane-departure"></i>
+            </div>
+            <h3 class="font-heading font-bold text-xl mb-3 text-navyDark">Air Express Courier</h3>
+            <p class="text-slate-600 text-sm mb-6 leading-relaxed">Time-critical international door-to-door delivery with priority customs clearance and realtime telemetry.</p>
+            <button onclick="navigateTo('booking')" class="text-brandBlue font-semibold text-sm hover:text-brandRed flex items-center gap-2 group-hover:translate-x-1 transition-all">
+              Book Air Express <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all group">
+            <div class="w-14 h-14 bg-red-50 text-brandRed rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brandRed group-hover:text-white transition-all">
+              <i class="fa-solid fa-ship"></i>
+            </div>
+            <h3 class="font-heading font-bold text-xl mb-3 text-navyDark">Ocean Cargo Freight</h3>
+            <p class="text-slate-600 text-sm mb-6 leading-relaxed">Full Container Load (FCL) and Less than Container Load (LCL) worldwide ocean freight shipping options.</p>
+            <button onclick="navigateTo('quote')" class="text-brandBlue font-semibold text-sm hover:text-brandRed flex items-center gap-2 group-hover:translate-x-1 transition-all">
+              Request Freight Rate <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all group">
+            <div class="w-14 h-14 bg-blue-50 text-brandBlue rounded-xl flex items-center justify-center text-2xl mb-6 group-hover:bg-brandBlue group-hover:text-white transition-all">
+              <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <h3 class="font-heading font-bold text-xl mb-3 text-navyDark">Domestic Ground Delivery</h3>
+            <p class="text-slate-600 text-sm mb-6 leading-relaxed">Comprehensive nationwide door-to-door transport with flexible same-day and scheduled delivery windows.</p>
+            <button onclick="navigateTo('services')" class="text-brandBlue font-semibold text-sm hover:text-brandRed flex items-center gap-2 group-hover:translate-x-1 transition-all">
+              Explore Ground Services <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- How Process Works -->
+      <div class="bg-slate-100 py-20 px-4">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-brandRed font-bold uppercase tracking-wider text-sm">Simple Step-by-Step</span>
+            <h2 class="font-heading text-3xl font-extrabold text-navyDark">How Our Delivery Works</h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm text-center relative">
+              <div class="w-12 h-12 bg-brandBlue text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">1</div>
+              <h4 class="font-heading font-bold text-lg mb-2">Request or Book</h4>
+              <p class="text-slate-600 text-sm">Create shipment online, specify dimensions, origin & destination details.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm text-center relative">
+              <div class="w-12 h-12 bg-brandBlue text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">2</div>
+              <h4 class="font-heading font-bold text-lg mb-2">Parcel Pickup</h4>
+              <p class="text-slate-600 text-sm">Our courier collects parcel directly from your doorstep or warehouse facility.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm text-center relative">
+              <div class="w-12 h-12 bg-brandBlue text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">3</div>
+              <h4 class="font-heading font-bold text-lg mb-2">Global Transit</h4>
+              <p class="text-slate-600 text-sm">Track your item in realtime through customs hubs and sorting points.</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm text-center relative">
+              <div class="w-12 h-12 bg-brandRed text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4">4</div>
+              <h4 class="font-heading font-bold text-lg mb-2">Safe Doorbell Delivery</h4>
+              <p class="text-slate-600 text-sm">Recipient receives shipment with verified digital signature confirmation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Accordion Section -->
+      <div class="py-20 px-4 max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="font-heading text-3xl font-extrabold text-navyDark">Frequently Asked Questions</h2>
+          <p class="text-slate-600 mt-2">Have questions about your delivery? We've got answers.</p>
+        </div>
+
+        <div class="space-y-4">
+          <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <button onclick="toggleFaq(this)" class="w-full p-5 text-left font-semibold text-navyDark flex justify-between items-center hover:bg-slate-50">
+              <span>How do I track my Federalgroup shipment?</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+            </button>
+            <div class="px-5 pb-5 hidden text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
+              You can track your shipment anytime by typing your tracking code (e.g., FGL-98234710-US) into the Tracking bar on our homepage or navigation menu. You will receive live status updates, location checkpoints, and estimated delivery dates.
+            </div>
+          </div>
+
+          <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <button onclick="toggleFaq(this)" class="w-full p-5 text-left font-semibold text-navyDark flex justify-between items-center hover:bg-slate-50">
+              <span>What customs documents are required for international delivery?</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+            </button>
+            <div class="px-5 pb-5 hidden text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
+              Standard international shipments require a Commercial Invoice, packing list, and recipient contact details. Federalgroup Logistics automatically generates customs documentation templates during the online shipment booking process.
+            </div>
+          </div>
+
+          <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <button onclick="toggleFaq(this)" class="w-full p-5 text-left font-semibold text-navyDark flex justify-between items-center hover:bg-slate-50">
+              <span>Can I schedule a home or office pickup?</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+            </button>
+            <div class="px-5 pb-5 hidden text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-3">
+              Yes, when booking a shipment online via our "Book Shipment" tool, you can choose door pickup and set your preferred date and pickup window.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= PAGE 2: TRACKING ================= -->
+    <section id="page-tracking" class="page-view hidden py-12 px-4 max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h1 class="font-heading text-3xl sm:text-4xl font-extrabold text-navyDark">Shipment Live Tracking</h1>
+        <p class="text-slate-600 mt-2">Real-time status updates and delivery telemetry for your package.</p>
+      </div>
+
+      <!-- Tracking Search Box -->
+      <div class="bg-white p-6 rounded-2xl shadow-md border border-slate-200 mb-10">
+        <div class="flex flex-col sm:flex-row gap-4">
+          <div class="relative flex-grow">
+            <input type="text" id="track-page-input" placeholder="Enter Tracking ID (e.g. FGL-98234710-US)" class="w-full pl-11 pr-4 py-3.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-brandBlue outline-none font-mono uppercase text-sm">
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+          </div>
+          <button onclick="executeTrackingSearch()" class="bg-brandBlue hover:bg-brandBlueDark text-white px-8 py-3.5 rounded-xl font-semibold shadow-md transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-location-arrow"></i> Search Status
+          </button>
+        </div>
+
+        <div class="mt-4 flex flex-wrap items-center gap-2 text-xs text-slate-500">
+          <span class="font-semibold">Sample Tracking IDs:</span>
+          <button onclick="setTrackAndSearch('FGL-98234710-US')" class="text-brandBlue font-mono underline hover:text-brandRed">FGL-98234710-US (Delivered)</button>
+          <span>•</span>
+          <button onclick="setTrackAndSearch('FGL-44109823-UK')" class="text-brandBlue font-mono underline hover:text-brandRed">FGL-44109823-UK (In Transit)</button>
+          <span>•</span>
+          <button onclick="setTrackAndSearch('FGL-77210943-NG')" class="text-brandBlue font-mono underline hover:text-brandRed">FGL-77210943-NG (Out for Delivery)</button>
+        </div>
+      </div>
+
+      <!-- Loading State Indicator -->
+      <div id="tracking-loading" class="hidden text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-brandBlue border-t-transparent"></div>
+        <p class="text-slate-600 mt-4 font-medium">Fetching telemetry data from global hubs...</p>
+      </div>
+
+      <!-- Error State Bar -->
+      <div id="tracking-error" class="hidden bg-red-50 border border-red-200 rounded-2xl p-6 text-center mb-10">
+        <i class="fa-solid fa-triangle-exclamation text-brandRed text-3xl mb-2"></i>
+        <h3 class="font-bold text-red-800 text-lg">Tracking ID Not Found</h3>
+        <p class="text-red-600 text-sm mt-1">Please double check your number and try again. Sample codes are available above.</p>
+      </div>
+
+      <!-- Tracking Results Panel -->
+      <div id="tracking-result" class="hidden space-y-8">
+        
+        <!-- Summary Banner Card -->
+        <div class="bg-navyDark text-white rounded-2xl p-6 sm:p-8 shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div>
+            <div class="flex items-center gap-3 mb-2">
+              <span id="result-badge" class="bg-emerald-500 text-white text-xs px-3 py-1 rounded-full uppercase font-bold tracking-wider">In Transit</span>
+              <span class="text-slate-400 text-sm font-mono" id="result-id">FGL-00000000</span>
+            </div>
+            <h2 class="font-heading text-2xl font-bold" id="result-service">Express International Priority</h2>
+            <p class="text-slate-300 text-sm mt-1" id="result-route">New York, USA ➔ London, United Kingdom</p>
+          </div>
+          <div class="text-left md:text-right border-t md:border-t-0 border-slate-700 pt-4 md:pt-0 w-full md:w-auto">
+            <span class="text-xs text-slate-400 block font-medium">ESTIMATED DELIVERY</span>
+            <span class="text-2xl font-bold text-white font-heading" id="result-est-date">Oct 24, 2026</span>
+            <span class="text-xs text-emerald-400 block mt-0.5"><i class="fa-solid fa-circle-check"></i> On Schedule</span>
+          </div>
+        </div>
+
+        <!-- Timeline Progress Step Bar -->
+        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <h3 class="font-heading font-bold text-lg mb-8 text-navyDark">Delivery Progress Timeline</h3>
+          
+          <div id="timeline-steps" class="grid grid-cols-1 sm:grid-cols-4 gap-6 relative">
+            <!-- Dynamic Step Render Target -->
+          </div>
+        </div>
+
+        <!-- Detailed Info & Activity History -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- Package Specs -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <h3 class="font-heading font-bold text-lg text-navyDark border-b border-slate-100 pb-3">Shipment Specs</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <span class="text-slate-500">Sender:</span>
+                <span class="font-medium text-slate-800" id="result-sender">Global Tech Inc.</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Recipient:</span>
+                <span class="font-medium text-slate-800" id="result-recipient">Apex Trade Ltd</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Weight:</span>
+                <span class="font-medium text-slate-800" id="result-weight">4.5 kg</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-slate-500">Parcel Type:</span>
+                <span class="font-medium text-slate-800" id="result-type">Electronics / Commercial</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Log Timeline -->
+          <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h3 class="font-heading font-bold text-lg text-navyDark mb-4 border-b border-slate-100 pb-3">Tracking Event Log</h3>
+            <div class="space-y-6" id="result-activity-log">
+              <!-- Logs dynamic insert -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= PAGE 3: SERVICES ================= -->
+    <section id="page-services" class="page-view hidden py-12 px-4 max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="text-brandRed font-bold uppercase tracking-wider text-sm">Our Operations</span>
+        <h1 class="font-heading text-4xl font-extrabold text-navyDark">Courier & Logistics Solutions</h1>
+        <p class="text-slate-600">Discover comprehensive transportation capabilities built for individuals, commerce, and enterprise logistics.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Service 1 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all">
+          <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&w=600&q=80" alt="Air Express" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="font-heading font-bold text-xl mb-2 text-navyDark">Global Air Express</h3>
+            <p class="text-slate-600 text-sm mb-4">Fastest door-to-door courier service for urgent documents and high-value parcels worldwide.</p>
+            <button onclick="navigateTo('booking')" class="bg-brandBlue text-white w-full py-2.5 rounded-xl font-medium text-sm hover:bg-brandBlueDark transition-all">Book Air Express</button>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="Sea Freight" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="font-heading font-bold text-xl mb-2 text-navyDark">Ocean & Container Freight</h3>
+            <p class="text-slate-600 text-sm mb-4">Economical intermodal maritime shipping for heavy industrial machinery and cargo containers.</p>
+            <button onclick="navigateTo('quote')" class="bg-brandBlue text-white w-full py-2.5 rounded-xl font-medium text-sm hover:bg-brandBlueDark transition-all">Request Freight Quote</button>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all">
+          <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=600&q=80" alt="E-commerce Fulfillment" class="w-full h-48 object-cover">
+          <div class="p-6">
+            <h3 class="font-heading font-bold text-xl mb-2 text-navyDark">E-Commerce Last Mile</h3>
+            <p class="text-slate-600 text-sm mb-4">API integrated fulfillment, storage, and customer returns logistics for online retail businesses.</p>
+            <button onclick="navigateTo('contact')" class="bg-brandBlue text-white w-full py-2.5 rounded-xl font-medium text-sm hover:bg-brandBlueDark transition-all">Enterprise Inquiry</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= PAGE 4: REQUEST A QUOTE ================= -->
+    <section id="page-quote" class="page-view hidden py-12 px-4 max-w-5xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h1 class="font-heading text-3xl sm:text-4xl font-extrabold text-navyDark">Request Shipping Quote</h1>
+        <p class="text-slate-600 mt-2">Get instant price estimates and transit time calculations instantly.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Calculator Form -->
+        <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <form id="quote-form" onsubmit="event.preventDefault(); calculateShippingQuote();" class="space-y-5">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Origin Country</label>
+                <select id="quote-origin" class="w-full p-3 border border-slate-300 rounded-xl outline-none focus:border-brandBlue text-sm">
+                  <option value="US">United States (USA)</option>
+                  <option value="UK">United Kingdom (UK)</option>
+                  <option value="NG">Nigeria (NG)</option>
+                  <option value="DE">Germany (DE)</option>
+                  <option value="CN">China (CN)</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Destination Country</label>
+                <select id="quote-destination" class="w-full p-3 border border-slate-300 rounded-xl outline-none focus:border-brandBlue text-sm">
+                  <option value="UK">United Kingdom (UK)</option>
+                  <option value="US">United States (USA)</option>
+                  <option value="NG">Nigeria (NG)</option>
+                  <option value="DE">Germany (DE)</option>
+                  <option value="CN">China (CN)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Weight (KG)</label>
+                <input type="number" id="quote-weight" value="3.5" min="0.1" step="0.1" class="w-full p-3 border border-slate-300 rounded-xl outline-none focus:border-brandBlue text-sm">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Delivery Speed</label>
+                <select id="quote-speed" class="w-full p-3 border border-slate-300 rounded-xl outline-none focus:border-brandBlue text-sm">
+                  <option value="express">Express Air (2-3 Business Days)</option>
+                  <option value="standard">Standard Ground (5-7 Business Days)</option>
+                  <option value="economy">Economy Ocean Freight (14-21 Days)</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Package Type</label>
+              <div class="grid grid-cols-3 gap-3">
+                <label class="border border-slate-200 rounded-xl p-3 text-center cursor-pointer hover:border-brandBlue text-xs font-medium">
+                  <input type="radio" name="pkg-type" value="doc" class="mb-1 block mx-auto"> Document
+                </label>
+                <label class="border border-slate-200 rounded-xl p-3 text-center cursor-pointer border-brandBlue bg-blue-50/50 text-xs font-medium">
+                  <input type="radio" name="pkg-type" value="parcel" checked class="mb-1 block mx-auto"> Parcel / Box
+                </label>
+                <label class="border border-slate-200 rounded-xl p-3 text-center cursor-pointer hover:border-brandBlue text-xs font-medium">
+                  <input type="radio" name="pkg-type" value="freight" class="mb-1 block mx-auto"> Heavy Cargo
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="w-full bg-brandRed hover:bg-brandRedHover text-white py-3.5 rounded-xl font-bold transition-all shadow-md">
+              Calculate Instant Quote
+            </button>
+          </form>
+        </div>
+
+        <!-- Quote Breakdown Display -->
+        <div class="lg:col-span-5 bg-navyDark text-white p-6 sm:p-8 rounded-2xl flex flex-col justify-between shadow-xl">
+          <div>
+            <h3 class="font-heading font-bold text-xl mb-4 text-white border-b border-slate-700 pb-3">Estimated Cost breakdown</h3>
+            <div class="space-y-3 text-sm text-slate-300">
+              <div class="flex justify-between">
+                <span>Base Air Fare Rate:</span>
+                <span class="font-mono text-white" id="quote-base">$45.00</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Fuel Surcharge & Handling:</span>
+                <span class="font-mono text-white" id="quote-fuel">$12.50</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Customs Security Charge:</span>
+                <span class="font-mono text-white" id="quote-customs">$8.00</span>
+              </div>
+              <div class="border-t border-slate-700 my-4 pt-3 flex justify-between items-center">
+                <span class="font-bold text-lg text-white">Estimated Total:</span>
+                <span class="font-heading font-extrabold text-3xl text-brandRed" id="quote-total">$65.50</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 pt-4 border-t border-slate-700">
+            <button onclick="transferQuoteToBooking()" class="w-full bg-brandBlue hover:bg-brandBlueDark text-white py-3.5 rounded-xl font-bold transition-all shadow-md">
+              Proceed to Booking with Quote
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ================= PAGE 5: BOOK A SHIPMENT ================= -->
+    <section id="page-booking" class="page-view hidden py-12 px-4 max-w-4xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h1 class="font-heading text-3xl sm:text-4xl font-extrabold text-navyDark">Book a Shipment</h1>
+        <p class="text-slate-600 mt-2">Complete package information to generate an official Federalgroup dispatch reference.</p>
+      </div>
+
+      <div class="bg-white p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-md">
+        <form id="booking-form" onsubmit="event.preventDefault(); processBooking();" class="space-y-8">
+          
+          <!-- Sender Section -->
+          <div>
+            <h3 class="font-heading font-bold text-lg text-brandBlue mb-4 flex items-center gap-2 border-b border-slate-100 pb-2">
+              <i class="fa-solid fa-user-gear"></i> 1. Sender Information
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input type="text" id="sender-name" placeholder="Full Name or Company" required class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+              <input type="email" id="sender-email" placeholder="Email Address" required class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+              <input type="text" id="sender-phone" placeholder="Phone Number" required class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+              <input type="text" id="sender-address" placeholder="Pickup Address" required class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+            </div>
+          </div>
+
+          <!-- Recipient Section -->
+          <div>
+            <h3 class="font-heading font-bold text-lg text-brandBlue mb-4 flex items-center gap-2 border-b border-slate-100 pb-2">
+              <i class="fa-solid fa-location-dot"></i> 2. Recipient Information
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input type="text" id="recipient-name" placeholder="Recipient Full Name" required class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+              <input type="email" id="recipient-email" placeholder="Recipient Email" class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+              <input type="text" id="recipient-phone" placeholder="Recipient Phone" required class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+              <input type="text" id="recipient-address" placeholder="Destination Address" required class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+            </div>
+          </div>
+
+          <!-- Parcel Specs -->
+          <div>
+            <h3 class="font-heading font-bold text-lg text-brandBlue mb-4 flex items-center gap-2 border-b border-slate-100 pb-2">
+              <i class="fa-solid fa-box-open"></i> 3. Parcel Details
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <input type="number" id="book-weight" placeholder="Weight (kg)" value="2.0" step="0.1" class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+              <select id="book-service" class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+                <option value="Express Priority">Express Air Priority ($75)</option>
+                <option value="Standard Courier">Standard Courier ($40)</option>
+              </select>
+              <input type="text" id="book-description" placeholder="Description (e.g. Spare Parts)" required class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-brandRed hover:bg-brandRedHover text-white py-4 rounded-xl font-bold text-base transition-all shadow-lg flex items-center justify-center gap-2">
+            <i class="fa-solid fa-credit-card"></i> Generate Order & Proceed to Checkout
+          </button>
+        </form>
+      </div>
+    </section>
+
+
+    <!-- ================= PAGE 6: PAYMENT / CHECKOUT ================= -->
+    <section id="page-payment" class="page-view hidden py-12 px-4 max-w-3xl mx-auto">
+      <div class="text-center max-w-xl mx-auto mb-8">
+        <span class="bg-amber-100 text-amber-800 text-xs px-3 py-1 rounded-full font-semibold uppercase">Demonstration Checkout</span>
+        <h1 class="font-heading text-3xl font-extrabold text-navyDark mt-2">Complete Payment</h1>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
+        <div class="bg-navyDark text-white p-6 flex justify-between items-center">
+          <div>
+            <span class="text-xs text-slate-400 block">ORDER REFERENCE</span>
+            <span class="font-mono font-bold text-lg text-white" id="pay-ref">FGL-PENDING</span>
+          </div>
+          <div class="text-right">
+            <span class="text-xs text-slate-400 block">AMOUNT DUE</span>
+            <span class="font-heading font-extrabold text-2xl text-brandRed" id="pay-amount">$75.00</span>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-6">
+          <div class="bg-slate-50 p-4 rounded-xl text-xs text-slate-600 space-y-1">
+            <div class="flex justify-between"><span>Sender:</span> <strong id="pay-sender">N/A</strong></div>
+            <div class="flex justify-between"><span>Destination:</span> <strong id="pay-destination">N/A</strong></div>
+            <div class="flex justify-between"><span>Service:</span> <strong id="pay-service">Express Priority</strong></div>
+          </div>
+
+          <!-- Payment Options -->
+          <div class="space-y-3">
+            <label class="block text-xs font-bold uppercase text-slate-700">Select Payment Gateway</label>
+            <div class="grid grid-cols-2 gap-4">
+              <label class="border-2 border-brandBlue bg-blue-50/50 p-4 rounded-xl cursor-pointer flex items-center gap-3">
+                <input type="radio" name="pay-method" checked>
+                <span class="font-bold text-sm">Credit / Debit Card</span>
+              </label>
+              <label class="border border-slate-200 p-4 rounded-xl cursor-pointer flex items-center gap-3 hover:border-slate-300">
+                <input type="radio" name="pay-method">
+                <span class="font-bold text-sm">Flutterwave / Paystack</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Card Form Simulation -->
+          <div class="space-y-4 pt-2">
+            <input type="text" placeholder="Cardholder Name" value="Demo Tester" class="w-full p-3 border border-slate-300 rounded-xl text-sm">
+            <input type="text" placeholder="Card Number (Demo Only)" value="4242 •••• •••• 4242" class="w-full p-3 border border-slate-300 rounded-xl text-sm font-mono">
+            <div class="grid grid-cols-2 gap-4">
+              <input type="text" placeholder="MM/YY" value="12/28" class="p-3 border border-slate-300 rounded-xl text-sm text-center">
+              <input type="text" placeholder="CVV" value="123" class="p-3 border border-slate-300 rounded-xl text-sm text-center">
+            </div>
+          </div>
+
+          <button onclick="simulatePaymentSuccess()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-xl font-bold transition-all shadow-lg flex items-center justify-center gap-2">
+            <i class="fa-solid fa-lock"></i> Authorize Demo Payment
+          </button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= PAGE 7: ABOUT US ================= -->
+    <section id="page-about" class="page-view hidden py-12 px-4 max-w-7xl mx-auto">
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="text-brandRed font-bold uppercase tracking-wider text-sm">Our Legacy</span>
+        <h1 class="font-heading text-4xl font-extrabold text-navyDark">About Federalgroup Logistics</h1>
+        <p class="text-slate-600">Founded on precision, trust, and technological efficiency, Federalgroup Logistics connects business markets across 220 countries.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+        <div>
+          <h2 class="font-heading font-bold text-2xl text-navyDark mb-4">Pioneering Modern Freight & Courier Engineering</h2>
+          <p class="text-slate-600 text-sm leading-relaxed mb-4">
+            Federalgroup Logistics has grown into a premiere international courier provider. Through strategic hub locations and modern fleet telematics, we ensure seamless supply chain performance.
+          </p>
+          <div class="space-y-2 text-sm text-slate-700">
+            <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brandBlue"></i> Automated Sorting & Real-Time Tracking</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brandBlue"></i> Global Customs Expedited Processing</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brandBlue"></i> Eco-Friendly Zero Emission Delivery Fleet Option</div>
+          </div>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80" alt="Logistics Hub" class="rounded-2xl shadow-xl">
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================= PAGE 8: CONTACT US ================= -->
+    <section id="page-contact" class="page-view hidden py-12 px-4 max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h1 class="font-heading text-3xl sm:text-4xl font-extrabold text-navyDark">Contact Support</h1>
+        <p class="text-slate-600 mt-2">Get in touch with our global customer desk or visit a local service hub.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div class="lg:col-span-5 space-y-6">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+            <div class="w-12 h-12 bg-blue-50 text-brandBlue rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-building"></i></div>
+            <div>
+              <h4 class="font-bold text-navyDark">Global Headquarters</h4>
+              <p class="text-xs text-slate-500 mt-1">100 Logistics Blvd, Suite 400<br>New York, NY 10001, USA</p>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
+            <div class="w-12 h-12 bg-red-50 text-brandRed rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-phone"></i></div>
+            <div>
+              <h4 class="font-bold text-navyDark">Phone & Hotlines</h4>
+              <p class="text-xs text-slate-500 mt-1">International: +1 (800) 555-FGL<br>Dispatch Desk: +1 (212) 555-0199</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <form onsubmit="event.preventDefault(); showToast('Message Sent! Our support desk will contact you shortly.', 'success'); this.reset();" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input type="text" placeholder="Your Name" required class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+              <input type="email" placeholder="Your Email" required class="p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+            </div>
+            <input type="text" placeholder="Subject / Tracking ID" class="w-full p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue">
+            <textarea rows="4" placeholder="How can we assist you today?" required class="w-full p-3 border border-slate-300 rounded-xl text-sm outline-none focus:border-brandBlue"></textarea>
+            <button type="submit" class="bg-brandBlue hover:bg-brandBlueDark text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-md">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- Global Footer -->
+  <footer class="bg-navyDark text-slate-300 pt-16 pb-8 border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+      
+      <div class="lg:col-span-2 space-y-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-brandBlue rounded-lg flex items-center justify-center text-white">
+            <i class="fa-solid fa-boxes-packing text-xl"></i>
+          </div>
+          <span class="font-heading font-extrabold text-xl tracking-tight text-white">
+            FEDERAL<span class="text-brandRed">GROUP</span>
+          </span>
+        </div>
+        <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+          Federalgroup Logistics is an international courier operator delivering priority express, parcel cargo, and supply chain solutions globally.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-4">Quick Links</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="#" onclick="navigateTo('home')" class="hover:text-white transition-colors">Home</a></li>
+          <li><a href="#" onclick="navigateTo('tracking')" class="hover:text-white transition-colors">Track Shipment</a></li>
+          <li><a href="#" onclick="navigateTo('quote')" class="hover:text-white transition-colors">Calculate Quote</a></li>
+          <li><a href="#" onclick="navigateTo('booking')" class="hover:text-white transition-colors">Book Shipment</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-4">Services</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="#" onclick="navigateTo('services')" class="hover:text-white transition-colors">Air Express Delivery</a></li>
+          <li><a href="#" onclick="navigateTo('services')" class="hover:text-white transition-colors">Ocean Freight Containers</a></li>
+          <li><a href="#" onclick="navigateTo('services')" class="hover:text-white transition-colors">Same Day Courier</a></li>
+          <li><a href="#" onclick="navigateTo('services')" class="hover:text-white transition-colors">E-Commerce Logistics</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold text-sm mb-4">Customer Support</h4>
+        <p class="text-xs text-slate-400 mb-2">Subscribe to operational alerts & tracking updates:</p>
+        <div class="flex">
+          <input type="email" placeholder="Enter Email" class="px-3 py-2 text-xs bg-slate-800 border border-slate-700 rounded-l-lg outline-none text-white w-full">
+          <button onclick="showToast('Subscribed to newsletter', 'info')" class="bg-brandRed text-white px-3 rounded-r-lg text-xs font-bold">Join</button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 pt-6 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <div>© 2026 Federalgroup Logistics Inc. All rights reserved. (Demonstration System)</div>
+      <div class="flex gap-4">
+        <a href="#" class="hover:text-slate-400">Privacy Policy</a>
+        <a href="#" class="hover:text-slate-400">Terms of Service</a>
+        <a href="#" class="hover:text-slate-400">Security Clearance</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- JAVASCRIPT APP LOGIC -->
+  <script>
+    // Demo Tracking Database Mock
+    const TRACKING_DATABASE = {
+      'FGL-98234710-US': {
+        id: 'FGL-98234710-US',
+        status: 'Delivered',
+        badgeColor: 'bg-emerald-500',
+        service: 'Express Priority Courier',
+        origin: 'New York, USA',
+        destination: 'London, UK',
+        estDelivery: 'Delivered Oct 18, 2026',
+        sender: 'Tech Component Corp',
+        recipient: 'Apex Digital Ltd',
+        weight: '3.2 KG',
+        type: 'High-Value Electronics',
+        stepIndex: 4,
+        logs: [
+          { date: 'Oct 18, 2026 - 02:30 PM', title: 'Delivered - Signed by Receiver', location: 'London Hub, UK' },
+          { date: 'Oct 18, 2026 - 08:15 AM', title: 'Out for Courier Delivery', location: 'London Facility' },
+          { date: 'Oct 17, 2026 - 11:40 PM', title: 'Customs Cleared', location: 'Heathrow Airport (LHR)' },
+          { date: 'Oct 16, 2026 - 06:00 PM', title: 'Dispatched from Airport Hub', location: 'JFK Airport, NY' },
+          { date: 'Oct 15, 2026 - 10:00 AM', title: 'Shipment Created & Collected', location: 'New York, USA' }
+        ]
+      },
+      'FGL-44109823-UK': {
+        id: 'FGL-44109823-UK',
+        status: 'In Transit',
+        badgeColor: 'bg-blue-600',
+        service: 'Air Cargo Express',
+        origin: 'London, UK',
+        destination: 'Lagos, Nigeria',
+        estDelivery: 'Oct 25, 2026',
+        sender: 'British Retail Exporters',
+        recipient: 'Olu Shipping Hub',
+        weight: '12.5 KG',
+        type: 'Commercial Apparel',
+        stepIndex: 2,
+        logs: [
+          { date: 'Oct 20, 2026 - 01:20 AM', title: 'In Transit - International Flight Departed', location: 'Frankfurt Transit Hub' },
+          { date: 'Oct 19, 2026 - 04:30 PM', title: 'Processed at Hub', location: 'London Heathrow' },
+          { date: 'Oct 18, 2026 - 09:00 AM', title: 'Parcel Received at Facility', location: 'Manchester, UK' }
+        ]
+      },
+      'FGL-77210943-NG': {
+        id: 'FGL-77210943-NG',
+        status: 'Out for Delivery',
+        badgeColor: 'bg-amber-500',
+        service: 'Same-Day Courier',
+        origin: 'Lagos, NG',
+        destination: 'Abuja, NG',
+        estDelivery: 'Today (Oct 20, 2026)',
+        sender: 'Federalgroup Logistics Express',
+        recipient: 'Supreme Court Complex',
+        weight: '0.8 KG',
+        type: 'Legal Documents',
+        stepIndex: 3,
+        logs: [
+          { date: 'Oct 20, 2026 - 07:00 AM', title: 'Out for Final Delivery with Courier', location: 'Abuja Central District' },
+          { date: 'Oct 19, 2026 - 11:00 PM', title: 'Arrived at Destination Sorting Hub', location: 'Abuja Hub' }
+        ]
+      }
+    };
+
+    // Router State Control
+    function navigateTo(pageId) {
+      // Hide all pages
+      document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
+      
+      // Show selected page
+      const targetPage = document.getElementById(`page-${pageId}`);
+      if (targetPage) {
+        targetPage.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Update Navigation Buttons Active Styles
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if (btn.getAttribute('data-page') === pageId) {
+          btn.classList.add('bg-slate-100', 'text-brandBlue');
+        } else {
+          btn.classList.remove('bg-slate-100', 'text-brandBlue');
+        }
+      });
+
+      // Close mobile menu if open
+      document.getElementById('mobile-menu').classList.add('hidden');
+    }
+
+    // Toggle Mobile Navigation Menu
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // FAQ Accordion Toggle
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('i');
+      content.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    }
+
+    // Quick Track Handler (Hero)
+    function quickTrack() {
+      const input = document.getElementById('quick-tracking-input').value.trim();
+      if (!input) {
+        showToast('Please enter a tracking number', 'error');
+        return;
+      }
+      navigateTo('tracking');
+      document.getElementById('track-page-input').value = input;
+      executeTrackingSearch();
+    }
+
+    function fillAndTrack(code) {
+      document.getElementById('quick-tracking-input').value = code;
+      quickTrack();
+    }
+
+    function setTrackAndSearch(code) {
+      document.getElementById('track-page-input').value = code;
+      executeTrackingSearch();
+    }
+
+    // Execute Tracking Lookup Logic
+    function executeTrackingSearch() {
+      const trackId = document.getElementById('track-page-input').value.trim().toUpperCase();
+      const loading = document.getElementById('tracking-loading');
+      const error = document.getElementById('tracking-error');
+      const result = document.getElementById('tracking-result');
+
+      if (!trackId) {
+        showToast('Please enter a tracking reference', 'error');
+        return;
+      }
+
+      // Show Loading Spinner
+      loading.classList.remove('hidden');
+      error.classList.add('hidden');
+      result.classList.add('hidden');
+
+      setTimeout(() => {
+        loading.classList.add('hidden');
+        const data = TRACKING_DATABASE[trackId];
+
+        if (data) {
+          // Populate Tracking Result Panel
+          document.getElementById('result-id').textContent = data.id;
+          document.getElementById('result-badge').textContent = data.status;
+          document.getElementById('result-badge').className = `${data.badgeColor} text-white text-xs px-3 py-1 rounded-full uppercase font-bold tracking-wider`;
+          document.getElementById('result-service').textContent = data.service;
+          document.getElementById('result-route').textContent = `${data.origin} ➔ ${data.destination}`;
+          document.getElementById('result-est-date').textContent = data.estDelivery;
+          document.getElementById('result-sender').textContent = data.sender;
+          document.getElementById('result-recipient').textContent = data.recipient;
+          document.getElementById('result-weight').textContent = data.weight;
+          document.getElementById('result-type').textContent = data.type;
+
+          // Render Progress Timeline Steps
+          const stepNames = ['Order Created', 'Picked Up', 'In Transit', 'Out for Delivery'];
+          let stepsHTML = '';
+
+          stepNames.forEach((stepName, idx) => {
+            const stepNum = idx + 1;
+            let statusClass = 'border-slate-300 text-slate-400 bg-white';
+            let textClass = 'text-slate-400';
+
+            if (stepNum < data.stepIndex) {
+              statusClass = 'bg-emerald-500 border-emerald-500 text-white'; // Completed
+              textClass = 'text-emerald-600 font-bold';
+            } else if (stepNum === data.stepIndex) {
+              statusClass = 'bg-brandBlue border-brandBlue text-white animate-pulse'; // Current
+              textClass = 'text-brandBlue font-bold';
+            }
+
+            stepsHTML += `
+              <div class="flex flex-col items-center text-center">
+                <div class="w-10 h-10 rounded-full border-2 flex items-center justify-center font-bold text-sm mb-2 ${statusClass}">
+                  ${stepNum < data.stepIndex ? '<i class="fa-solid fa-check"></i>' : stepNum}
+                </div>
+                <span class="text-xs ${textClass}">${stepName}</span>
+              </div>
+            `;
+          });
+
+          document.getElementById('timeline-steps').innerHTML = stepsHTML;
+
+          // Render Tracking Log
+          let logsHTML = '';
+          data.logs.forEach(log => {
+            logsHTML += `
+              <div class="flex gap-4 items-start">
+                <div class="w-3 h-3 rounded-full bg-brandBlue mt-1"></div>
+                <div>
+                  <h4 class="font-bold text-sm text-navyDark">${log.title}</h4>
+                  <p class="text-xs text-slate-500">${log.location} • ${log.date}</p>
+                </div>
+              </div>
+            `;
+          });
+          document.getElementById('result-activity-log').innerHTML = logsHTML;
+
+          result.classList.remove('hidden');
+        } else {
+          error.classList.remove('hidden');
+        }
+      }, 700);
+    }
+
+    // Shipping Calculator Function
+    function calculateShippingQuote() {
+      const weight = parseFloat(document.getElementById('quote-weight').value) || 1;
+      const speed = document.getElementById('quote-speed').value;
+      
+      let baseRate = 30;
+      if (speed === 'express') baseRate = 50;
+      if (speed === 'economy') baseRate = 20;
+
+      const base = (baseRate + (weight * 5)).toFixed(2);
+      const fuel = (base * 0.15).toFixed(2);
+      const customs = (8.00).toFixed(2);
+      const total = (parseFloat(base) + parseFloat(fuel) + parseFloat(customs)).toFixed(2);
+
+      document.getElementById('quote-base').textContent = `$${base}`;
+      document.getElementById('quote-fuel').textContent = `$${fuel}`;
+      document.getElementById('quote-customs').textContent = `$${customs}`;
+      document.getElementById('quote-total').textContent = `$${total}`;
+
+      showToast('Calculated updated shipping rates', 'info');
+    }
+
+    function transferQuoteToBooking() {
+      navigateTo('booking');
+      showToast('Quote details applied to booking form', 'success');
+    }
+
+    // Booking Submission Logic
+    let currentBookingData = {};
+
+    function processBooking() {
+      const sender = document.getElementById('sender-name').value;
+      const recipient = document.getElementById('recipient-name').value;
+      const destination = document.getElementById('recipient-address').value;
+      const service = document.getElementById('book-service').value;
+
+      const randomRef = 'FGL-' + Math.floor(10000000 + Math.random() * 90000000) + '-DEMO';
+
+      currentBookingData = {
+        ref: randomRef,
+        sender: sender,
+        recipient: recipient,
+        destination: destination,
+        service: service,
+        amount: service.includes('Express') ? '$75.00' : '$40.00'
+      };
+
+      // Populate Payment Page
+      document.getElementById('pay-ref').textContent = currentBookingData.ref;
+      document.getElementById('pay-amount').textContent = currentBookingData.amount;
+      document.getElementById('pay-sender').textContent = currentBookingData.sender;
+      document.getElementById('pay-destination').textContent = currentBookingData.destination;
+      document.getElementById('pay-service').textContent = currentBookingData.service;
+
+      navigateTo('payment');
+      showToast('Shipment reference created! Complete demo payment.', 'success');
+    }
+
+    // Payment Simulation Logic
+    function simulatePaymentSuccess() {
+      showToast('Payment Processing...', 'info');
+
+      setTimeout(() => {
+        showToast('Payment Approved! Reference ID: ' + currentBookingData.ref, 'success');
+        
+        // Auto-register demo ID in tracking database
+        TRACKING_DATABASE[currentBookingData.ref] = {
+          id: currentBookingData.ref,
+          status: 'Order Created',
+          badgeColor: 'bg-blue-600',
+          service: currentBookingData.service,
+          origin: 'Origin Facility',
+          destination: currentBookingData.destination,
+          estDelivery: 'Scheduled (3 Days)',
+          sender: currentBookingData.sender,
+          recipient: currentBookingData.recipient,
+          weight: '2.0 KG',
+          type: 'General Courier Parcel',
+          stepIndex: 1,
+          logs: [
+            { date: 'Just Now', title: 'Payment Confirmed & Order Created', location: 'System Portal' }
+          ]
+        };
+
+        // Redirect to tracking page
+        navigateTo('tracking');
+        document.getElementById('track-page-input').value = currentBookingData.ref;
+        executeTrackingSearch();
+      }, 1200);
+    }
+
+    // Toast Notification Manager
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+
+      let bgColor = 'bg-navyDark text-white';
+      if (type === 'success') bgColor = 'bg-emerald-600 text-white';
+      if (type === 'error') bgColor = 'bg-brandRed text-white';
+
+      toast.className = `${bgColor} px-5 py-3 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-3 transition-all transform translate-y-2 pointer-events-auto`;
+      toast.innerHTML = `
+        <i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-bell'}"></i>
+        <span>${message}</span>
+      `;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
